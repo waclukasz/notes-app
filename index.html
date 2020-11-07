@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,600&display=swap" 
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/typography.css">
+  <link rel="stylesheet" href="./styles/helpers.css">
+
+  <link rel="stylesheet" href="./styles/styles.css">
+
+  <script src="./scripts/main.js"></script>
+
+  <title>Notes App</title>
+</head>
+
+<body class="main-app">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+  <div
+    id="modal" 
+    class="modal__overlay hidden d-flex justify-center align-center"
+  >
+    <div class="modal__container">
+      <button
+        id="closeModalBtn" 
+        class="modal__close-btn d-flex align-center justify-center"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+
+      <h2 class="modal__header font-size--md font-weight--light">Add Your Notes</h2>
+
+      <form class="modal__form">
+        <div class="modal__form-control"> 
+          <label 
+            for="noteTitle"
+            class="font-size--xs"
+          >
+            Note Title
+          </label>
+          <input
+            class="width-100" 
+            type="text"
+            name="title" 
+            id="noteTitle"
+          >
+        </div>
+
+        <div class="modal__form-control"> 
+          <label 
+            for="noteContent"
+            class="font-size--xs"
+          >
+            Note Content
+          </label>
+          <textarea
+            class="modal__note width-100" 
+            type="text"
+            name="title" 
+            id="noteContent"
+          >
+          </textarea>
+        </div>
+      </form>
+
+      <button
+        id="addNoteBtn"
+        class="notes-box__add-btn color--primary d-flex align-center justify-center"
+      >
+        <i class="fas fa-plus color--secondary"></i>
+      </button>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <a 
+      class="main-nav__app-name font-size--xl font-weight--light"
+      href="http://localhost:5500"
+    >
+      Magic Note App
+    </a>
+
+    <div class="main-nav__search-box">
+      <input
+        class="main-nav__search-input"
+        type="text"
+        name="searchInput"
+        id="searchInput"
+      >
+      <button>
+        <i class="fas fa-search color--secondary"></i>
+      </button>
+    </div>
+
+    <div>
+      <button>
+        <i class="fas fa-filter color--secondary"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main class="notes-box d-flex">
+    <button
+      id="addButton"
+      class="notes-box__add-btn color--primary d-flex align-center justify-center"
+    >
+      <i class="fas fa-plus color--secondary"></i>
+    </button>
+  </main>
+  
+</body>
+
+</html>

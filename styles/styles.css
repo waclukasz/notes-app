@@ -1,0 +1,127 @@
+* {
+  font-family: 'Open-Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+.main-app {
+  background-color: #f1f6f9;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+  min-height: 90px;
+  background: #14274e;
+}
+
+.main-nav__app-name {
+  color: #f1f6f9;
+}
+
+.main-nav__app-name:visited {
+  color: rgba(241,246,249, 0.85);
+}
+
+.main-nav__search-input {
+  width: 400px;
+  color: #f1f6f9;
+  font-size: 18px;
+}
+
+.notes-box {
+  position: relative;
+  min-height: calc(100vh - 90px);
+}
+
+.notes-box__add-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #14274e;
+  box-shadow: 2px 4px 5px 0px #224284ad; 
+  transition: background-color 200ms;
+}
+
+.notes-box__add-btn:hover {
+  background-color: #213b70;
+}
+
+.modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+  background-color: #0e131c99;
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+
+  animation-name: fadeIn;
+  animation-duration: 200ms;
+  animation-fill-mode: forwards;
+}
+
+.modal__overlay.hidden {
+  display: none;
+}
+
+.modal__container {
+  position: relative;
+  width: 320px;
+  height: 450px;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f1f6f9;
+  box-shadow: 2px 4px 5px 0px #224284ad;
+
+  animation-name: slideUp;
+  animation-duration: 200ms;
+  animation-fill-mode: forwards;
+}
+
+.modal__close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.modal__form {
+  margin-top: 30px;
+}
+
+.modal__form-control {
+  margin-bottom: 12px;
+}
+
+.modal__note {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 70px;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}

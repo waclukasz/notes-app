@@ -1,0 +1,31 @@
+.font-size {
+  font-size: 16px;
+}
+
+.font-size--xl {
+  font-size: 32px;
+}
+
+.font-size--lg {
+  font-size: 26px;
+}
+
+.font-size--md {
+  font-size: 22px;
+}
+
+.font-size--xs {
+  font-size: 14px;
+}
+
+.font-weight--light {
+  font-weight: 300;
+}
+
+.color--primary {
+  color: #f1f6f9;
+}
+
+.color--secondary {
+  color: #f1f6f9;
+}
