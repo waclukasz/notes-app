@@ -48,7 +48,31 @@ window.addEventListener('DOMContentLoaded', (event) => {
     noteTitle.value = '';
     noteContent.value = '';
 
+    renderNotes();
     toggleModal();
+  }
+
+  const renderNotes = () => {
+    const notesContainer = document.querySelector('.notes-box__container');
+
+    if (notesList.length === 0) {
+      notesContainer.innerHTML = ` 
+        <p class="font-size--xl">You have no notes</p>
+      `
+    } else {
+      let notesTemplate = '';
+
+      notesList.forEach((note) => {
+         const noteTemplate = `
+          <div class="notes-box__note">
+            <h3 class="font-size--md font-weight--light">${note.title}</h3>
+            <p class="notes-box__content font-weight--light font-size--xs">${note.content}</p>
+          </div>
+        `
+        notesTemplate = notesTemplate + noteTemplate;
+      })
+      notesContainer.innerHTML = notesTemplate;
+    }
   }
 
   const resetFields = (fields, inputs) => {
