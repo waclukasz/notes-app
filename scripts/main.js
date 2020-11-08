@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
+  const savedNotes = localStorage.getItem('notesList');
+  let notesList = savedNotes ? JSON.parse(savedNotes) : [];
   let isModalActive = false;
-  let notesList = [];
 
   const mainModal = document.getElementById('modal');
   const addNoteBtn = document.getElementById('addButton');
@@ -9,7 +10,17 @@ window.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   
   searchInput.addEventListener('keyup', ($event) => {
-    console.log($event);
+    const query = $event.target.value.toLocaleLowerCase();
+
+    if (query.length > 3) {
+      const filteredNotes = notesList.filter((note) => {
+        return note.title.toLocaleLowerCase().includes(query) || note.content.toLocaleLowerCase().includes(query);
+      })
+
+      renderNotes(filteredNotes);
+    } else {
+      renderNotes()
+    }
   });
 
   const createNote = () => {
@@ -52,21 +63,24 @@ window.addEventListener('DOMContentLoaded', () => {
     noteTitle.value = '';
     noteContent.value = '';
 
+    saveNotesToStorage();
+
     renderNotes();
     toggleModal();
   }
 
-  const renderNotes = () => {
+  
+  const renderNotes = (allNotes = notesList) => {
     const notesContainer = document.querySelector('.notes-box__container');
-
+  
     if (notesList.length === 0) {
       notesContainer.innerHTML = ` 
         <p class="font-size--xl">You have no notes</p>
       `
     } else {
       let notesTemplate = '';
-
-      notesList.forEach((note) => {
+  
+      allNotes.forEach((note) => {
          const noteTemplate = `
           <div 
             data-id="${note.date}"
@@ -84,13 +98,17 @@ window.addEventListener('DOMContentLoaded', () => {
         notesTemplate = notesTemplate + noteTemplate;
       });
       notesContainer.innerHTML = notesTemplate;
-
+  
       // Html template was rendered
       const allRemoveBtns = document.querySelectorAll('.notes-box__remove-btn');
       allRemoveBtns.forEach((nodeBtn) => {
         nodeBtn.addEventListener('click', removeNote)
       })
     }
+  }
+
+  const saveNotesToStorage = (allNotes = notesList) => {
+    localStorage.setItem('notesList', JSON.stringify(allNotes));
   }
 
   const removeNote = ($event) => {
@@ -154,4 +172,6 @@ window.addEventListener('DOMContentLoaded', () => {
   
   addNoteBtn.addEventListener('click', toggleModal);
   closeModalBtn.addEventListener('click', toggleModal);
+
+  renderNotes();
 });
