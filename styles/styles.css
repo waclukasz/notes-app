@@ -114,10 +114,15 @@
   width: 200px;
   height: 240px;
   padding: 16px;
-  border: 1px solid #9ba4b4;
   border-radius: 8px;
   box-shadow: 2px 4px 5px 0px #224284ad;
   overflow-y: auto;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.notes-box__note:hover {
+  filter: brightness(0.2);
 }
 
 .notes-box__note:hover .notes-box__remove-btn {

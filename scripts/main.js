@@ -82,7 +82,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
       allNotes.forEach((note) => {
          const noteTemplate = `
-          <div 
+          <div
             data-id="${note.date}"
             class="notes-box__note"
           >
@@ -104,7 +104,117 @@ window.addEventListener('DOMContentLoaded', () => {
       allRemoveBtns.forEach((nodeBtn) => {
         nodeBtn.addEventListener('click', removeNote)
       })
+
+      document.querySelectorAll('.notes-box__note').forEach((noteItem) => {
+        noteItem.addEventListener('dblclick', ($event) => {
+          const noteId = $event.target.getAttribute('data-id');
+
+          const editedNote = notesList.find((note) => note.date.toString() === noteId);
+
+          const mainApp = document.querySelector('body');
+
+          const modalTemplate = `
+            <div
+              id="edit-modal" 
+              class="modal__overlay d-flex justify-center align-center"
+            >
+              <div class="modal__container">
+                <button
+                  id="closeEditModal" 
+                  class="modal__close-btn d-flex align-center justify-center"
+                >
+                  <i class="fas fa-times"></i>
+                </button>
+          
+                <h2 class="modal__header font-size--md font-weight--light">Edit your note</h2>
+          
+                <form class="modal__form">
+                  <div class="modal__form-control"> 
+                    <label 
+                      for="noteTitle"
+                      class="font-size--xs"
+                    >
+                      Note Title
+                    </label>
+                    <input
+                      class="width-100" 
+                      type="text"
+                      name="title" 
+                      id="noteTitleEdit"
+                      placeholder="max 20 chars..."
+                    >
+                    <p
+                      id="titleError"
+                      class="error font-size--xxs font-weight--light"
+                    >
+                    </p>
+                  </div>
+          
+                  <div class="modal__form-control"> 
+                    <label 
+                      for="noteContent"
+                      class="font-size--xs"
+                    >
+                      Note Content
+                    </label>
+                    <textarea
+                      class="modal__note width-100" 
+                      type="text"
+                      name="title" 
+                      id="noteContentEdit"
+                    ></textarea>
+                    <p
+                      id="contentError"
+                      class="error font-size--xxs font-weight--light"
+                    >
+                    </p>
+                  </div>
+                </form>
+          
+                <button
+                  id="editBtn"
+                  class="notes-box__add-btn color--primary d-flex align-center justify-center"
+                >
+                  <i class="fas fa-plus color--secondary"></i>
+                </button>
+              </div>
+            </div>
+          `
+          const modalBoxContainer = document.createElement('div');
+
+          modalBoxContainer.classList.add('edit-modal-container');
+          modalBoxContainer.innerHTML = modalTemplate;
+
+          mainApp.appendChild(modalBoxContainer);
+
+          const newTitle = document.getElementById('noteTitleEdit');
+          newTitle.value = editedNote.title
+
+          const newContent = document.getElementById('noteContentEdit');
+          newContent.value = editedNote.content;
+
+          document.getElementById('editBtn').addEventListener('click', () => {
+            editNote(noteId, newTitle.value, newContent.value)
+
+            console.log(notesList)
+            renderNotes();
+          });
+        })
+      })
     }
+  }
+
+  const editNote = (id, title, content) => {
+    notesList = notesList.map((note) => {
+      if (note.date.toString() === id) {
+        return {
+          ...note,
+          title: title,
+          content: content,
+        }
+      }
+      return note;
+    })
   }
 
   const saveNotesToStorage = (allNotes = notesList) => {
