@@ -12,39 +12,53 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const noteTitle = document.getElementById('noteTitle');
     const noteContent = document.getElementById('noteContent');
 
-    // const isFieldsValid = validateFields(noteTitle);
+    if (typeof validateNoteTitle(noteTitle.value) === 'string') {
+      generateError({
+        titleError: validateNoteTitle(noteTitle.value)
+      }, [noteTitle])
+      return;
+    } else {
+      resetFields(
+        ['titleError'],
+        [noteTitle]
+      )
+    }
+    
+    if (typeof validateNoteContent(noteContent.value) === 'string') {
+      generateError({
+        contentError: validateNoteContent(noteContent.value)
+      }, [noteContent])
+      return;
+    } else {
+      resetFields(
+        ['contentError'],
+        [noteContent]
+      )
+    }
 
-    console.log(validateNoteContent(noteContent.value));
+    // Single Note Model
+    const newNote = {
+      title: noteTitle.value,
+      content: noteContent.value,
+      date: Date.now()
+    }
 
-    // if (isFieldsValid) {
+    notesList.push(newNote);
 
-    // }
+    noteTitle.value = '';
+    noteContent.value = '';
 
-    // if (noteContent.value && (noteTitle.value && noteTitle.value.length <= 20)) {
-    //     noteTitle.style.borderColor = '#394867';
-    //     // Single Note Model
-    //     const newNote = {
-    //       title: noteTitle.value,
-    //       content: noteContent.value,
-    //       date: Date.now()
-    //     }
-
-    //     notesList.push(newNote);
-
-    //     noteTitle.value = '';
-    //     noteContent.value = '';
-
-    //     toggleModal();
-    // } else {
-    //   generateError({
-    //     contentError: 'Field is required',
-    //     titleError: 'Field is required'
-    //   }, [noteTitle, noteContent])
-    // }
+    toggleModal();
   }
 
-  const validateFields = () => {
+  const resetFields = (fields, inputs) => {
+    fields.forEach((fieldId) => {
+      document.getElementById(fieldId).innerText = ''
+    })
 
+    inputs.forEach((inputId) => {
+      inputId.style.borderColor = '#14274e'
+    })
   }
 
   const validateNoteTitle = (title) => {
@@ -60,7 +74,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   const validateNoteContent = (content) => {
-    return !content.trim() && 'Field is requierd'
+    return !!content.trim() || 'Field is requierd'
   }
 
   const generateError = (fields, inputs) => {
