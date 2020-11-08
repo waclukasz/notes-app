@@ -105,6 +105,28 @@
   min-height: 70px;
 }
 
+.notes-box__container {
+  padding: 30px;
+}
+
+.notes-box__note {
+  width: 200px;
+  height: 240px;
+  padding: 16px;
+  border: 1px solid #9ba4b4;
+  border-radius: 8px;
+  box-shadow: 2px 4px 5px 0px #224284ad;
+  overflow-y: scroll;
+}
+
+.notes-box__content {
+  margin-top: 12px;
+}
+
+.error {
+  padding-left: 4px;
+  color: #e81616;
+}
 
 @keyframes fadeIn {
   0% {
