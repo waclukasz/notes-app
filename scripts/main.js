@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', (event) => {
   let isModalActive = false;
-  const notesList = [];
+  let notesList = [];
 
   const mainModal = document.getElementById('modal');
   const addNoteBtn = document.getElementById('addButton');
@@ -92,8 +92,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const removeBtn = $event.target;
     const singleNote = removeBtn.parentNode.parentNode;
     const noteId = singleNote.getAttribute('data-id');
-    console.log(noteId)
-    
+   
+    notesList = notesList.filter((note) => note.date.toString() !== noteId);
+  
+    renderNotes();
   }
 
   const resetFields = (fields, inputs) => {
