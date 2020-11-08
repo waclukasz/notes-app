@@ -119,6 +119,7 @@ window.addEventListener('DOMContentLoaded', () => {
     notesList = notesList.filter((note) => note.date.toString() !== noteId);
   
     renderNotes();
+    saveNotesToStorage();
   }
 
   const resetFields = (fields, inputs) => {
