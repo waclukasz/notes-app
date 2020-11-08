@@ -110,6 +110,7 @@
 }
 
 .notes-box__note {
+  position: relative;
   width: 200px;
   height: 240px;
   padding: 16px;
@@ -117,6 +118,26 @@
   border-radius: 8px;
   box-shadow: 2px 4px 5px 0px #224284ad;
   overflow-y: auto;
+}
+
+.notes-box__note:hover .notes-box__remove-btn {
+  visibility: visible;
+  opacity: 1;
+}
+
+.notes-box__remove-btn {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  color: #e81616;
+  font-size: 18px;
+  transition: opacity 400ms;
+}
+
+.notes-box__note:not(:last-of-type) {
+  margin-right: 24px;
 }
 
 .notes-box__content {

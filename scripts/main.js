@@ -7,7 +7,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const closeModalBtn = document.getElementById('closeModalBtn');
   const createNoteBtn = document.getElementById('addNoteBtn');
 
-
   const createNote = () => {
     const noteTitle = document.getElementById('noteTitle');
     const noteContent = document.getElementById('noteContent');
@@ -64,15 +63,37 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       notesList.forEach((note) => {
          const noteTemplate = `
-          <div class="notes-box__note">
+          <div 
+            data-id="${note.date}"
+            class="notes-box__note"
+          >
             <h3 class="font-size--md font-weight--light">${note.title}</h3>
             <p class="notes-box__content font-weight--light font-size--xs">${note.content}</p>
+            <button
+              class="notes-box__remove-btn"
+            >
+              <i class="far fa-trash-alt"></i>
+            </button>
           </div>
         `
         notesTemplate = notesTemplate + noteTemplate;
-      })
+      });
       notesContainer.innerHTML = notesTemplate;
+
+      // Html template was rendered
+      const allRemoveBtns = document.querySelectorAll('.notes-box__remove-btn');
+      allRemoveBtns.forEach((nodeBtn) => {
+        nodeBtn.addEventListener('click', removeNote)
+      })
     }
+  }
+
+  const removeNote = ($event) => {
+    const removeBtn = $event.target;
+    const singleNote = removeBtn.parentNode.parentNode;
+    const noteId = singleNote.getAttribute('data-id');
+    console.log(noteId)
+    
   }
 
   const resetFields = (fields, inputs) => {
