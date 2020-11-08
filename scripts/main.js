@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', () => {
   let isModalActive = false;
   let notesList = [];
 
@@ -6,6 +6,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const addNoteBtn = document.getElementById('addButton');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const createNoteBtn = document.getElementById('addNoteBtn');
+  const searchInput = document.getElementById('searchInput');
+  
+  searchInput.addEventListener('keyup', ($event) => {
+    console.log($event);
+  });
 
   const createNote = () => {
     const noteTitle = document.getElementById('noteTitle');
